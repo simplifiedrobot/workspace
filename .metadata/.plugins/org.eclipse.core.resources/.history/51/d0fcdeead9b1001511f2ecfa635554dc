@@ -1,0 +1,45 @@
+package bean;
+
+import java.util.ArrayList;
+
+public class newsbean {
+
+	//字段名字必须和服务器返回的字段名一致, 方便gson解析
+	public	int retcode;
+	public	ArrayList<slidingnews> data;
+
+	@Override
+	public String toString() {
+		return "newsbean [slidingnews=" + data + "]";
+	}
+
+	public class slidingnews {
+
+		public	String id;
+		public	String title;
+		public	int type;
+		public	String url;
+		public	ArrayList<tabnews> children;
+
+		@Override
+		public String toString() {
+			return "slidingnews [title=" + title + ", tabnews=" + children + "]";
+		}
+
+	}
+
+	public class tabnews {
+
+		public	String id;
+		public	String title;
+		public	int type;
+		public	String url;
+
+		@Override
+		public String toString() {
+			return "tabnews [title=" + title + "]";
+		}
+
+	}
+
+}

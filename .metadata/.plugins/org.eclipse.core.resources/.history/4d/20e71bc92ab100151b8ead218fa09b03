@@ -1,0 +1,7 @@
+package base.impl;
+
+import base.basepager;
+
+public class homepager extends basepager {
+
+}

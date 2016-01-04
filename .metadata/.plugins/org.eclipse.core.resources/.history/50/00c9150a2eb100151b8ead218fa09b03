@@ -1,0 +1,38 @@
+package com.example.news;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
+public class MainActivity extends SlidingFragmentActivity {
+	private String LEFTMENU="LEFTMENU";
+	private String CONTENTVIEW="CONTENTVIEW";
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		System.out.println("进入主页面");
+		setBehindContentView(R.layout.left_menu);
+		System.out.println("拿到右页面");
+		SlidingMenu slidingMenu = getSlidingMenu();
+		System.out.println("slidingMenu");
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		slidingMenu.setSecondaryMenu(R.layout.right_menu);
+		slidingMenu.setMode(SlidingMenu.LEFT_RIGHT);
+		slidingMenu.setBehindOffset(100);
+		initFragment();
+	}
+	
+	
+  public void	initFragment(){
+		FragmentManager fm = getSupportFragmentManager();
+		FragmentTransaction transaction = fm.openTransaction();
+		transaction.replace(R.id.fl_leftmenu,new  fragment_leftmenu(), LEFTMENU);
+		transaction.replace(R.id.fl_contentview,new  fragment_contentView(), CONTENTVIEW);
+		transaction.commit();
+	};
+}

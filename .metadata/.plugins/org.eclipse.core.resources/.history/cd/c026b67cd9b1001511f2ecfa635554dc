@@ -1,0 +1,17 @@
+package com.example.news;
+
+import bean.newsbean;
+import android.view.View;
+
+public class fragment_leftmenu extends baseFragment {
+
+	@Override
+	View initView() {
+		View view = View.inflate(getActivity(), R.layout.fragment_leftmenu, null);
+		return view;
+	}
+
+	public void setMenuData(newsbean data){
+		System.out.println("接受到数据"+data);
+	}
+}

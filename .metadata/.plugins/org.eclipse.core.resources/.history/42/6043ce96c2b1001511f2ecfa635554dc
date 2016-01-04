@@ -1,0 +1,40 @@
+package com.example.news.utils;
+
+import bean.newsbean;
+
+import com.google.gson.Gson;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+
+
+
+
+public class categoriesxUtils {
+
+	final String ROOTURL="tomcat:http://10.0.2.2:8080/zhbj";
+	final String CATEGORIESURL=ROOTURL+"categories.json";
+	private String reulst;
+
+	public  String getData() {
+		HttpUtils http = new HttpUtils();
+		http.send(HttpMethod.GET, CATEGORIESURL,new RequestCallBack<String>() {
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				reulst = responseInfo.toString();
+				System.out.println(reulst);
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				error.printStackTrace();
+			}
+		}	);
+		Gson gson = new Gson();
+		newsbean json = gson.fromJson(reulst, newsbean.class);
+		System.out.println(json);
+	return "";
+	}
+}

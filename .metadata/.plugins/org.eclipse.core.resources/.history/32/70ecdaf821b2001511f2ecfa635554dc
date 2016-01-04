@@ -1,0 +1,20 @@
+package menudetail;
+
+import android.app.Activity;
+import android.view.View;
+import base.newsdetail;
+import bean.newsbean.slidingnews;
+
+public class menu_news_detail extends newsdetail {
+
+
+	public menu_news_detail(Activity activity) {
+		super(activity);
+	}
+
+	@Override
+	public View initView() {
+		return null;
+	}
+
+}

@@ -1,0 +1,37 @@
+package menudetail;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+import base.newsdetail;
+import bean.newsbean.tabnews;
+
+public class menu_news_detail extends newsdetail {
+
+	public tabnews mnews;
+	private TextView text;
+	public menu_news_detail(Activity activity) {
+		super(activity);
+	}
+
+	public menu_news_detail(Activity activity, tabnews news) {
+		super(activity);
+		System.out.println("news"+news);
+		mnews = news;
+	}
+
+	@Override
+	public View initView() {
+		text = new TextView(mactivity);
+		text.setText("±Í«©œÍ«È“≥");
+		text.setTextColor(Color.RED);
+		text.setTextSize(22);
+		text.setGravity(Gravity.CENTER);
+		return text;
+	}
+	public void setData() {
+		text.setText(mnews.title);
+	}
+}

@@ -1,0 +1,29 @@
+package base.impl;
+
+import com.example.news.R;
+
+import android.app.Activity;
+import android.os.StrictMode.VmPolicy;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import base.basepager;
+
+public class homepager extends basepager {
+
+	public homepager(Activity activity) {
+		super(activity);
+	}
+
+	@Override
+	public void initView() {
+		super.initView();
+		TextView tv_title = (TextView) mview.findViewById(R.id.tv_title);
+		FrameLayout fl_content = (FrameLayout)mview.findViewById(R.id.fl_content);
+	}
+
+	@Override
+	public void initData() {
+		super.initData();
+	}
+
+}

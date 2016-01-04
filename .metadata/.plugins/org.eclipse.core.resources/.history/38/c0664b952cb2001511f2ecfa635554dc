@@ -1,0 +1,32 @@
+package menudetail;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+import base.newsdetail;
+import bean.newsbean.tabnews;
+
+public class menu_news_detail extends newsdetail {
+
+
+	public menu_news_detail(Activity activity, tabnews news) {
+		super(activity);
+		System.out.println(news);
+		mnews = news;
+	}
+
+	@Override
+	public View initView() {
+		TextView text = new TextView(mactivity);
+		System.out.println(mnews.getTitle());
+		System.out.println(mnews.title);
+		text.setText(mnews.getTitle());
+		text.setTextColor(Color.RED);
+		text.setTextSize(22);
+		text.setGravity(Gravity.CENTER);
+		return text;
+	}
+
+}

@@ -1,0 +1,95 @@
+package menudetail;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import base.newsdetail;
+import bean.TabData;
+import bean.newsbean.tabnews;
+
+import com.example.news.R;
+import com.example.news.utils.MyURL;
+import com.google.gson.Gson;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.lidroid.xutils.view.annotation.ViewInject;
+
+public class menu_news_detail extends newsdetail {
+
+	public tabnews mnews;
+	private TextView text;
+	private TabData detail_news;
+	@ViewInject(R.id.vp_newsmenudetail_detail)
+	private ViewPager mViewpager;
+	private ArrayList<TabData.TopNewsData> tabnewsdata;
+	public menu_news_detail(Activity activity) {
+		super(activity);
+	}
+	public menu_news_detail(Activity activity, tabnews news) {
+		super(activity);
+		System.out.println("news" + news);
+		mnews = news;
+	}
+	@Override
+	public View initView() {
+		View view = View.inflate(mactivity, R.layout.menu_news_detail, null);
+		ViewUtils.inject(view);
+		return view;
+	}
+	public void initData() {
+		HttpUtils http = new HttpUtils();
+		String url=MyURL.ROOTURL+mnews.url;
+		http.send(HttpMethod.GET, url,new RequestCallBack<String>() {
+		
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				String json=responseInfo.result;
+				Gson gson = new Gson();
+				detail_news = gson.fromJson(json, TabData.class);
+				tabnewsdata = detail_news.data.topnews;
+				
+				mViewpager.setAdapter(new MyAdapter());
+			}
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				error.printStackTrace();
+			}
+		} );
+	}
+	
+	class MyAdapter extends PagerAdapter{
+
+		@Override
+		public int getCount() {
+			return 0;
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			return arg0==arg1;
+		}
+		
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			ImageView image = new ImageView(mactivity);
+			String imageUrl=detail_news.
+			return super.instantiateItem(container, position);
+		}
+		
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			container.removeView((View)(object));
+		}
+	}
+	
+}

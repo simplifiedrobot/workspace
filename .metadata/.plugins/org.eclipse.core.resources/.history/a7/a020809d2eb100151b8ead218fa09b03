@@ -1,0 +1,66 @@
+package com.example.news;
+
+import java.util.ArrayList;
+
+import base.basepager;
+import base.impl.govpager;
+import base.impl.homepager;
+import base.impl.masterpager;
+import base.impl.newspager;
+import base.impl.settingpager;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class fragment_contentView extends baseFragment {
+
+	private ArrayList<basepager> list;
+
+	@Override
+	View initView() {
+		View view = View.inflate(getActivity(), R.layout.fragment_contentview,
+				null);
+		ViewPager viewpager = (ViewPager) view
+				.findViewById(R.id.viewpager_main);
+		viewpager.setAdapter(new contentAdapter());
+		return view;
+	}
+
+	@Override
+	public void initData() {
+		list = new ArrayList<basepager>();
+		list.add(new homepager(mactivity));
+		list.add(new newspager(mactivity));
+		list.add(new masterpager(mactivity));
+		list.add(new govpager(mactivity));
+		list.add(new settingpager(mactivity));
+	
+		super.initData();
+	}
+
+	class contentAdapter extends PagerAdapter {
+
+		@Override
+		public int getCount() {
+			return list.size();
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			return arg0 == arg1;  
+		}
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			list.get(position).initData();
+			container.addView(list.get(position).mview);
+			return list.get(position).mview;
+		}
+
+		@Override
+		public void destroyItem(View container, int position, Object object) {
+			destroyItem(container, position, (ViewPager) object);
+		}
+	}
+}

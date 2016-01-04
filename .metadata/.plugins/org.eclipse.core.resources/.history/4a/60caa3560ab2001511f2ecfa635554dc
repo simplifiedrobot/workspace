@@ -1,0 +1,14 @@
+package menudetail;
+
+import android.view.View;
+import base.newsdetail;
+
+public class interactMenuDetail extends newsdetail {
+
+	@Override
+	View initView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

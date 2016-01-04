@@ -1,0 +1,22 @@
+package base;
+
+import android.app.Activity;
+import android.view.View;
+
+public abstract class newsdetail {
+
+	private Activity mactivity;
+  private View  view;
+	public newsdetail(Activity activity) {
+		mactivity = activity;
+		view=initView();
+		initData();
+	}
+
+	abstract View  initView();
+
+	public void initData() {
+
+	};
+
+}

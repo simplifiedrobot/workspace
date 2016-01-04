@@ -1,0 +1,35 @@
+package base;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.ImageButton;
+
+import com.example.news.R;
+
+public class basepager {
+
+	public Activity mactivity;
+	public View mview;
+	private ImageButton ib_menu;
+
+	public basepager(Activity activity) {
+		mactivity = activity;
+		initView();
+	}
+
+	public void initView() {
+		mview = View.inflate(mactivity, R.layout.basepager, null);
+		ib_menu = (ImageButton) mview.findViewById(R.id.ib_menu);
+	}
+
+	public void initData() {
+
+	};
+	public void setbtVisible(boolean b) {
+		if (b) {
+			ib_menu.setVisibility(View.VISIBLE);
+		}else{
+			ib_menu.setVisibility(View.VISIBLE);
+		}
+	}
+}

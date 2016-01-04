@@ -1,0 +1,16 @@
+package com.example.news;
+
+import android.view.View;
+
+public class fragment_leftmenu extends baseFragment {
+
+	@Override
+	View initView() {
+		View view = View.inflate(getActivity(), R.layout.fragment_leftmenu, null);
+		return view;
+	}
+
+	public void setMenuData(String data){
+		
+	}
+}

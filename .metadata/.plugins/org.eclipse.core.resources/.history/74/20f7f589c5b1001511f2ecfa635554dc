@@ -1,0 +1,73 @@
+package base.impl;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import base.basepager;
+import bean.newsbean;
+
+import com.example.news.R;
+import com.google.gson.Gson;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+
+public class newspager extends basepager {
+
+	private FrameLayout fl_content;
+
+	final String ROOTURL = "http://10.0.2.2:8080/zhbj/";
+	final String CATEGORIESURL = ROOTURL + "categories.json";
+	private String reulst;
+
+	public newspager(Activity activity) {
+		super(activity);
+	}
+
+	@Override
+	public void initView() {
+		super.initView();
+		TextView tv_title = (TextView) mview.findViewById(R.id.tv_title);
+		tv_title.setText("新闻中心");
+		fl_content = (FrameLayout) mview.findViewById(R.id.fl_content);
+	}
+
+	@Override
+	public void initData() {
+		super.initData();
+		setbtVisible(true);
+		setSlidingmenu(true);
+		TextView text = new TextView(mactivity);
+		text.setText("新闻中心");
+		text.setTextColor(Color.RED);
+		text.setTextSize(22);
+		text.setGravity(Gravity.CENTER);
+		fl_content.addView(text);
+		getData();
+	}
+
+	public String getData() {
+		HttpUtils http = new HttpUtils();
+		http.send(HttpMethod.GET, CATEGORIESURL, new RequestCallBack<String>() {
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				reulst = responseInfo.result;
+				System.out.println(reulst);
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				error.printStackTrace();
+			}
+		});
+		Gson gson = new Gson();
+		newsbean json = gson.fromJson(reulst, newsbean.class);
+		System.out.println(json);
+		return "";
+	}
+
+}

@@ -1,0 +1,44 @@
+package bean;
+
+import java.util.ArrayList;
+
+public class newsbean {
+
+	int retcode;
+	public	ArrayList<slidingnews> slidingnews;
+
+	@Override
+	public String toString() {
+		return "newsbean [slidingnews=" + slidingnews + "]";
+	}
+
+	public class slidingnews {
+
+		public	String id;
+		public	String title;
+		public	int type;
+		public	String url;
+		public	ArrayList<tabnews> tabnews;
+
+		@Override
+		public String toString() {
+			return "slidingnews [title=" + title + ", tabnews=" + tabnews + "]";
+		}
+
+	}
+
+	public class tabnews {
+
+		public	String id;
+		public	String title;
+		public	int type;
+		public	String url;
+
+		@Override
+		public String toString() {
+			return "tabnews [title=" + title + "]";
+		}
+
+	}
+
+}

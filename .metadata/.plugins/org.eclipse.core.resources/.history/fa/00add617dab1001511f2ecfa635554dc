@@ -1,0 +1,60 @@
+package com.example.news;
+
+import java.util.ArrayList;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import bean.newsbean;
+import bean.newsbean.slidingnews;
+
+public class fragment_leftmenu extends baseFragment {
+
+	private ListView lv_menu;
+	private ArrayList<slidingnews> slidingnews;
+
+	@Override
+	View initView() {
+		View view = View.inflate(getActivity(), R.layout.fragment_leftmenu,
+				null);
+		lv_menu = (ListView) view.findViewById(R.id.lv_menu);
+		lv_menu.setAdapter(new menuAdapter());
+		return view;
+	}
+
+	public void setMenuData(newsbean data) {
+		System.out.println("接受到数据" + data);
+		slidingnews = data.data;
+
+	}
+
+	class menuAdapter extends BaseAdapter {
+		@Override
+		public int getCount() {
+			return slidingnews.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return slidingnews.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View inflate = View
+					.inflate(mactivity, R.layout.listview_menu, null);
+			TextView tv_menu_title = (TextView) inflate
+					.findViewById(R.id.tv_menu_title);
+		tv_menu_title.setText(slidingnews.);
+			return inflate;
+		}
+
+	}
+}

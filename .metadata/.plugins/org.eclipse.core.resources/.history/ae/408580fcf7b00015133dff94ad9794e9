@@ -1,0 +1,13 @@
+package com.example.news;
+
+import android.view.View;
+
+public class fragment_contentView extends baseFragment {
+
+	@Override
+	View initView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

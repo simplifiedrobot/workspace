@@ -1,0 +1,23 @@
+package base.impl;
+
+import android.app.Activity;
+import android.widget.TextView;
+import base.basepager;
+
+public class homepager extends basepager {
+
+	public homepager(Activity activity) {
+		super(activity);
+	}
+	
+@Override
+public void initView() {
+	super.initView();
+	
+}
+	@Override
+	public void initData() {
+		super.initData();
+	}
+
+}

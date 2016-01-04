@@ -1,0 +1,51 @@
+package com.example.news;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.Window;
+
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+
+public class MainActivity extends SlidingFragmentActivity {
+	private String LEFTMENU="LEFTMENU";
+	private String CONTENTVIEW="CONTENTVIEW";
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		setBehindContentView(R.layout.left_menu);
+		SlidingMenu slidingMenu = getSlidingMenu();
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		//slidingMenu.setSecondaryMenu(R.layout.right_menu);
+		//slidingMenu.setMode(SlidingMenu.LEFT_RIGHT);
+		slidingMenu.setMode(SlidingMenu.LEFT);
+		slidingMenu.setBehindOffset(200);
+		initFragment();
+	}
+	
+  public void	initFragment(){
+		FragmentManager fm = getSupportFragmentManager();
+		FragmentTransaction transaction = fm.openTransaction();
+		transaction.replace(R.id.fl_leftmenu,new  fragment_leftmenu(), LEFTMENU);
+		transaction.replace(R.id.fl_contentview,new  fragment_contentView(), CONTENTVIEW);
+		transaction.commit();
+	};
+	
+	public Fragment getleftFragment(){
+		FragmentManager fm = getSupportFragmentManager();
+		fragment_leftmenu fragment = (fragment_leftmenu) fm.findFragmentByTag(LEFTMENU);
+		return fragment;
+	}
+	public Fragment getcontentView(){
+		FragmentManager fm = getSupportFragmentManager();
+		fragment_contentView fragment = (fragment_contentView) fm.findFragmentByTag(LEFTMENU);
+		return fragment;
+	}
+
+
+}

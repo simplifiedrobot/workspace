@@ -1,0 +1,103 @@
+package base.impl;
+
+import java.util.ArrayList;
+
+import menudetail.interactMenuDetail;
+import menudetail.newsMenuDetail;
+import menudetail.photoMenuDetail;
+import menudetail.topicMenuDetail;
+import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import base.basepager;
+import base.newsdetail;
+import bean.newsbean;
+
+import com.example.news.MainActivity;
+import com.example.news.R;
+import com.example.news.fragment_leftmenu;
+import com.google.gson.Gson;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+
+public class newspager extends basepager {
+
+	private FrameLayout fl_content;
+	private MainActivity activity;
+	final String ROOTURL = "http://10.0.2.2:8080/zhbj/";
+	final String CATEGORIESURL = ROOTURL + "categories.json";
+	private String result;
+
+
+	private ArrayList<newsdetail> list;
+
+	public newspager(Activity activity) {
+		super(activity);
+	}
+
+	@Override
+	public void initView() {
+		super.initView();
+		TextView tv_title = (TextView) mview.findViewById(R.id.tv_title);
+		tv_title.setText("新闻中心");
+		fl_content = (FrameLayout) mview.findViewById(R.id.fl_content);
+	}
+
+	@Override
+	public void initData() {
+		super.initData();
+		list = new ArrayList<newsdetail>();
+		setbtVisible(true);
+		setSlidingmenu(true);
+		list.add(new newsMenuDetail(mactivity));
+		list.add(new topicMenuDetail(mactivity));
+		list.add(new photoMenuDetail(mactivity));
+		list.add(new interactMenuDetail(mactivity));
+		fl_content.addView(list.get(0).view);
+		getData();
+	}
+
+	public void setNewsDetialPosition(int postion) {
+		int mposition = postion;
+		fl_content.removeAllViews();
+		fl_content.addView(list.get(mposition).view);
+	}
+
+	public void getData() {
+		HttpUtils http = new HttpUtils();
+		http.send(HttpMethod.GET, CATEGORIESURL, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				result = responseInfo.result;
+				System.out.println(result);
+				newsbean newsbean = JsonForm(result);
+				activity = (MainActivity) mactivity;
+				fragment_leftmenu fragment = (fragment_leftmenu) activity
+						.getleftFragment();
+				fragment.setMenuData(newsbean);
+			}
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				error.printStackTrace();
+			}
+		});
+	}
+
+	public newsbean JsonForm(String result) {
+		Gson gson = new Gson();
+		newsbean json = gson.fromJson(result, newsbean.class);
+
+		System.out.println(json);
+		return json;
+	}
+
+}

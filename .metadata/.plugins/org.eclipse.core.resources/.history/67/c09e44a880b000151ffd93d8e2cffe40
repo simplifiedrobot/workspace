@@ -1,0 +1,119 @@
+package com.example.news;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+
+public class guideActivity extends Activity {
+	private ViewPager viewpager;
+	private LinearLayout ll_pointer;
+	private ArrayList<ImageView> imagelist;
+	private ImageView iv_point;
+
+	private static final int[] drawableIds = new int[] { R.drawable.guide_1,
+			R.drawable.guide_2, R.drawable.guide_3 };;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activityguide);
+		viewpager = (ViewPager) findViewById(R.id.viewpager);
+		ll_pointer = (LinearLayout) findViewById(R.id.ll_pointer);
+		initView();
+
+		// 获取视图树
+		ll_pointer.getViewTreeObserver().addOnGlobalLayoutListener(
+				new OnGlobalLayoutListener() {
+					private int pointWidth;
+
+					@Override
+					public void onGlobalLayout() {
+						pointWidth = ll_pointer.getChildAt(1).getPaddingLeft()
+								- ll_pointer.getChildAt(0).getPaddingLeft();
+					}
+				});
+
+		viewpager.setAdapter(new myAdapter());
+		viewpager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int position) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onPageScrolled(int position, float positionOffset,
+					int positionOffsetPixels) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
+	private void initView() {
+		imagelist = new ArrayList<ImageView>();
+		for (int i = 0; i < drawableIds.length; i++) {// 初始化引导图片
+			ImageView image = new ImageView(this);
+			image.setBackgroundResource(drawableIds[i]);
+			imagelist.add(image);
+		}
+
+		for (int i = 0; i < drawableIds.length; i++) {// 初始化引灰色圆点
+			View view = new View(this);
+			view.setBackgroundResource(R.drawable.guide_pointer_grey);
+			LayoutParams params = new LinearLayout.LayoutParams(10, 10);
+			if (i > 0) {
+				params.leftMargin = 10;
+			}
+			view.setLayoutParams(params);
+			ll_pointer.addView(view);
+		}
+	}
+
+	class myAdapter extends PagerAdapter {
+
+		@Override
+		public int getCount() {
+			return drawableIds.length;
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			return arg0 == arg1;
+		}
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			System.out.println("进入instantiateitem");
+			container.addView(imagelist.get(position));
+			return imagelist.get(position);
+		}
+
+		@Override
+		public void destroyItem(ViewGroup container, int position, Object object) {
+			container.removeView((View) object);
+		}
+
+	}
+
+}

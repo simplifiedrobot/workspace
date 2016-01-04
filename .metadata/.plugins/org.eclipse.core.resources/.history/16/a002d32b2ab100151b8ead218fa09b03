@@ -1,0 +1,25 @@
+package base;
+
+import com.example.news.R;
+
+import android.app.Activity;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+
+public class basepager {
+
+	public Activity mactivity;
+	private View mview;
+	
+	public void  basepager(Activity activity){
+		mactivity=activity;
+		initView();
+	}
+	public View initView(){
+		mview = View.inflate(mactivity, R.layout.basepager, null);
+		return  mview;
+	}
+	public void initData(){
+		
+	};
+}

@@ -1,0 +1,7 @@
+package com.example.news;
+
+import Acitivity;
+
+public class MainActivity extends Acitivity {
+
+}
