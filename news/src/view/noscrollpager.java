@@ -17,16 +17,11 @@ public class noscrollpager extends ViewPager {
 		// TODO Auto-generated constructor stub
 	}
  
-	@Override
 	public boolean onTouchEvent(MotionEvent arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
 	public boolean onInterceptTouchEvent(MotionEvent arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-
+//×îºóy
 }

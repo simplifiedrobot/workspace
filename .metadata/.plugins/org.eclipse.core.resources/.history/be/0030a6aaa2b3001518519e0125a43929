@@ -1,0 +1,61 @@
+package view;
+
+import android.content.Context;
+import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+
+public class topnewsViewpager extends ViewPager {
+
+	private int startX;
+	private int startY;
+	private int endX;
+	private int endY;
+
+	public topnewsViewpager(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	public topnewsViewpager(Context context) {
+		super(context);
+	}
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+
+		switch (ev.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			startX = (int) ev.getX();
+			startY = (int) ev.getY();
+			break;
+		case MotionEvent.ACTION_UP:
+			endX = (int) ev.getX();
+			endY = (int) ev.getY();
+			if (Math.abs(endX - startX) > Math.abs(endY - startY)) {// ≈–∂œ «∫·œÚª¨∂Ø
+				if (endX > startX) {// ”“ªÆ
+					if (getCurrentItem() == 0) {
+						getParent().requestDisallowInterceptTouchEvent(false);// ¿πΩÿ
+					} else {
+						getParent().requestDisallowInterceptTouchEvent(true);// ≤ª¿πΩÿ
+					}
+				}
+
+				if (endX < startX) {// ◊ÛªÆ
+					if (getCurrentItem() == getAdapter().getCount() - 1) {
+						getParent().requestDisallowInterceptTouchEvent(false);// ¿πΩÿ
+					} else {
+						getParent().requestDisallowInterceptTouchEvent(true);// ≤ª¿πΩÿ
+					}
+				}
+
+			}else{
+				getParent().requestDisallowInterceptTouchEvent(true);// ≤ª¿πΩÿ
+			}
+
+			break;
+		}
+
+		return super.dispatchTouchEvent(ev);
+	}
+
+}

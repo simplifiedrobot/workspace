@@ -23,3 +23,8 @@
 1451913543156	Convert local variable 'detail_news' to field
 1451914684014	Convert local variable 'tabnewsdata' to field
 1451914903776	Convert local variable 'utils' to field
+1451993599866	Rename type 'tabnewsViewpager'
+1451993679444	Convert local variable 'startX' to field
+1451993682634	Convert local variable 'startY' to field
+1451994437624	Delete element
+1452001673846	Convert local variable 'listview' to field

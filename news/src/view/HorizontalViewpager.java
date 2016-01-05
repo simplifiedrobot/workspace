@@ -20,10 +20,10 @@ public class HorizontalViewpager extends ViewPager {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
-		if(getCurrentItem()!=0){
-			getParent().requestDisallowInterceptTouchEvent(true);
-		}else{
+		if(getCurrentItem()==0){//第一列时请求拦截
 			getParent().requestDisallowInterceptTouchEvent(false);
+		}else{
+			getParent().requestDisallowInterceptTouchEvent(true);
 		}
 		return super.dispatchTouchEvent(ev);
 	}

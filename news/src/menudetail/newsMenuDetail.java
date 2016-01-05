@@ -2,9 +2,11 @@ package menudetail;
 
 import java.util.ArrayList;
 
+import view.HorizontalViewpager;
 import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -14,10 +16,13 @@ import base.newsdetail;
 import bean.newsbean.slidingnews;
 import bean.newsbean.tabnews;
 
+import com.example.news.MainActivity;
 import com.example.news.R;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class newsMenuDetail extends newsdetail {
+public class newsMenuDetail extends newsdetail implements
+OnPageChangeListener{
 
 	private TextView text;
 	private ArrayList<tabnews> list;
@@ -30,20 +35,22 @@ public class newsMenuDetail extends newsdetail {
 
 	public newsMenuDetail(Activity activity, slidingnews slidingnews) {
 		super(activity, slidingnews);
-		System.out.println("newsMenuDetail得到的数据"+slidingnews);
+		System.out.println("newsMenuDetail得到的数据" + slidingnews);
 		list = slidingnews.getChildren();
 		initDataView();
 	}
+
 	@Override
 	public View initView() {
 		View view = View.inflate(mactivity, R.layout.newsmenudetail, null);
-		viewpager = (ViewPager) view.findViewById(R.id.vp_newsmenudetail);
+		viewpager = (ViewPager) view
+				.findViewById(R.id.vp_newsmenudetail);
 		indicator = (TabPageIndicator) view.findViewById(R.id.indicator);
+
 		iv_next = (ImageButton) view.findViewById(R.id.iv_next);
-	
 		return view;
 	}
-	
+
 	@Override
 	public void initData() {
 		super.initData();
@@ -59,6 +66,7 @@ public class newsMenuDetail extends newsdetail {
 		mAdapter = new newsDetialAdpter();
 		viewpager.setAdapter(mAdapter);
 		indicator.setViewPager(viewpager);
+		indicator.setOnPageChangeListener(newsMenuDetail.this);
 		iv_next.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -99,6 +107,30 @@ public class newsMenuDetail extends newsdetail {
 
 			container.removeView((View) object);
 
+		}
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		MainActivity mActivity = (MainActivity) mactivity;
+		SlidingMenu slidingMenu = mActivity.getSlidingMenu();
+		
+		if (arg0 == 0) {
+			slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		} else {
+			slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 		}
 	}
 

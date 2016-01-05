@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <view.topnewsViewpager
+            android:id="@+id/vp_newsmenudetail_detail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFCCCCCC"
+            android:padding="10dip"
+            app:fillColor="#FF888888"
+            app:pageColor="#88FF0000"
+            app:radius="10dp"
+            app:strokeColor="#FF000000"
+            app:strokeWidth="2dp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/topnews_listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

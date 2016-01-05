@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <view.topnewsViewpager
+            android:id="@+id/vp_newsmenudetail_detail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#a000" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:textSize="14sp"
+                android:textColor="#fff"
+                android:text="新闻标题"/>
+
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFCCCCCC"
+                android:padding="3dip"
+                app:fillColor="#f00"
+                app:pageColor="#a00"
+                app:radius="3dp"
+              />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/topnews_listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>
